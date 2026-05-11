@@ -14,7 +14,16 @@ connectCloudinary()
 
 //middlewares
 app.use(express.json())
-app.use(cors())
+
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.ADMIN_URL
+]
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}))
 
 //api endpoints
 app.use('/api/admin',adminRouter)
